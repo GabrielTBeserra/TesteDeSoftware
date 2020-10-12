@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Conta {
     private final int numeroDaConta;
+    private final double limiteContratado;
+    private final List<Extrato> extrato;
     private TipoConta tipoConta;
     private double saldo;
-    private double limiteContratado;
-    private List<Extrato> extrato;
 
     public Conta(int numeroDaConta, TipoConta tipoConta, double limiteContratado) {
         this.numeroDaConta = numeroDaConta;
@@ -45,19 +45,32 @@ public class Conta {
     }
 
     public double sacar(double valor) {
-        return 0;
+        if ((saldo - valor < 0) || (valor > saldo)) {
+            new Exception("Nao possui Saldo suficiente");
+        }
+        saldo -= valor;
+        return saldo;
     }
 
-    public void depositar(double valor) {
+    public double depositar(double valor) {
+        saldo += valor;
+
+        return saldo;
+    }
+
+    public void transferirValor(double valor, Conta contaPara) {
+        if ((saldo - valor < 0) || (valor > saldo)) {
+            new Exception("Nao possui Saldo suficiente");
+        }
+
+        if (contaPara.equals(this)) {
+            new Exception("As duas contas nao podem ser iguais");
+        }
 
     }
 
-    public void transferirValor(double value, Conta contaPara) {
-
-    }
-
-    private void exibirExtrato(){
-        for(Extrato extrato : extrato){
+    private void exibirExtrato() {
+        for (Extrato extrato : extrato) {
             System.out.println(extrato.getHorario() + " - " + extrato.getAcao() + " - " + extrato.getValor());
         }
     }
