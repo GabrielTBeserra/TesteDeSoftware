@@ -72,4 +72,18 @@ public class ContaTest {
         conta1.transferirValor(50, conta1);
     }
 
+
+    @Test
+    public void exebirExtrato(){
+        Conta conta1 = new Conta(52116, TipoConta.CONTA_CORRENTE, 50);
+        Cliente cliente1 = new Cliente("Alfredo", "161231561321", conta1);
+        // Depositando 50 para o cliente 1
+        cliente1.getConta().depositar(50);
+        cliente1.getConta().depositar(50);
+        cliente1.getConta().depositar(50);
+        cliente1.getConta().depositar(50);
+
+        conta1.exibirExtrato();
+    }
+
 }

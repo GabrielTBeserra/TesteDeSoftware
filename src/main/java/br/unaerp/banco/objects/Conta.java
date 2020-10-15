@@ -76,7 +76,7 @@ public class Conta {
         this.saldo -= valor;
     }
 
-    private void exibirExtrato() {
+    public void exibirExtrato() {
         for (Extrato extrato : extrato) {
             System.out.println(extrato.getHorario() + " - " + extrato.getAcao() + " - " + extrato.getValor());
         }
