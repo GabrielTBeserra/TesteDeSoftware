@@ -3,11 +3,20 @@ package br.unaerp.banco.objects;
 import br.unaerp.banco.enums.TipoConta;
 import br.unaerp.banco.exceptions.IncorrectAccountException;
 import br.unaerp.banco.exceptions.WithoutBalanceException;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class ContaTest {
+
+    private Conta conta;
+    private Cliente cliente;
+
+    @Before
+    public void setup(){
+
+    }
 
     @Test
     public void sacar() {
@@ -74,7 +83,7 @@ public class ContaTest {
 
 
     @Test
-    public void exebirExtrato(){
+    public void exibirExtrato(){
         Conta conta1 = new Conta(52116, TipoConta.CONTA_CORRENTE, 50);
         Cliente cliente1 = new Cliente("Alfredo", "161231561321", conta1);
         // Depositando 50 para o cliente 1
