@@ -1,6 +1,8 @@
 package br.unaerp.banco.objects;
 
 import br.unaerp.banco.enums.TipoConta;
+import br.unaerp.banco.exceptions.IncorrectAccountException;
+import br.unaerp.banco.exceptions.WithoutBalanceException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class Conta {
 
     public double sacar(double valor) {
         if ((saldo - valor < 0) || (valor > saldo)) {
-            new Exception("Nao possui Saldo suficiente");
+            throw new WithoutBalanceException("Valor informado maior que o saldo");
         }
         saldo -= valor;
         return saldo;
@@ -60,13 +62,18 @@ public class Conta {
 
     public void transferirValor(double valor, Conta contaPara) {
         if ((saldo - valor < 0) || (valor > saldo)) {
-            new Exception("Nao possui Saldo suficiente");
+            throw new WithoutBalanceException("Valor informado maior que o saldo");
         }
 
         if (contaPara.equals(this)) {
-            new Exception("As duas contas nao podem ser iguais");
+            throw new IncorrectAccountException("As duas contas nao podem ser iguais");
         }
 
+
+
+
+        contaPara.depositar(valor);
+        this.saldo -= valor;
     }
 
     private void exibirExtrato() {
