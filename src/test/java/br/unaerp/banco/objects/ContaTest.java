@@ -10,14 +10,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ContaTest {
 
-    private Conta conta;
-    private Cliente cliente;
-
-    @Before
-    public void setup(){
-
-    }
-
     @Test
     public void sacar() {
         Conta conta = new Conta(52116, TipoConta.CONTA_CORRENTE, 50);
@@ -95,4 +87,40 @@ public class ContaTest {
         conta1.exibirExtrato();
     }
 
+    @Test(expected = IncorrectAccountException.class)
+    public void transferirAPartirDeContaPoupanca(){
+        Conta conta1 = new Conta(52116, TipoConta.CONTA_POUPANCA, 50);
+        Cliente cliente1 = new Cliente("Alfredo", "161231561321", conta1);
+        // Depositando 50 para o cliente 1
+        cliente1.getConta().depositar(50);
+
+        Conta conta2 = new Conta(52116, TipoConta.CONTA_CORRENTE, 50);
+        Cliente cliente2 = new Cliente("Alfredo", "161231561321", conta2);
+        // Depositando 50 para o cliente 2
+        cliente2.getConta().depositar(50);
+        conta1.transferirValor(50, conta2);
+    }
+
+    @Test(expected = IncorrectAccountException.class)
+    public void transferirDeUmaContaPoupancaParaOutra(){
+        Conta conta1 = new Conta(52116, TipoConta.CONTA_POUPANCA, 50);
+        Cliente cliente1 = new Cliente("Alfredo", "161231561321", conta1);
+        // Depositando 50 para o cliente 1
+        cliente1.getConta().depositar(50);
+
+        Conta conta2 = new Conta(52116, TipoConta.CONTA_POUPANCA, 50);
+        Cliente cliente2 = new Cliente("Alfredo", "161231561321", conta2);
+        // Depositando 50 para o cliente 2
+        cliente2.getConta().depositar(50);
+        conta1.transferirValor(50, conta2);
+    }
+
+
+    @Test(expected = IncorrectAccountException.class)
+    public void depositarEmContaSalario(){
+        Conta conta1 = new Conta(52116, TipoConta.CONTA_SALARIO, 50);
+        Cliente cliente1 = new Cliente("Alfredo", "161231561321", conta1);
+        // Depositando 50 para o cliente 1
+        cliente1.getConta().depositar(50);
+    }
 }

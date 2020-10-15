@@ -55,12 +55,20 @@ public class Conta {
     }
 
     public double depositar(double valor) {
+        if(this.tipoConta.equals(TipoConta.CONTA_SALARIO)){
+            throw new IncorrectAccountException("Voce não pode depoistar em uma conta do tipo: Conta Salario");
+        }
+
         saldo += valor;
 
         return saldo;
     }
 
     public void transferirValor(double valor, Conta contaPara) {
+        if (this.tipoConta.equals(TipoConta.CONTA_POUPANCA)) {
+            throw new IncorrectAccountException("Voce não pode fazer transferencias em uma conta poupança");
+        }
+
         if ((saldo - valor < 0) || (valor > saldo)) {
             throw new WithoutBalanceException("Valor informado maior que o saldo");
         }
@@ -68,9 +76,6 @@ public class Conta {
         if (contaPara.equals(this)) {
             throw new IncorrectAccountException("As duas contas nao podem ser iguais");
         }
-
-
-
 
         contaPara.depositar(valor);
         this.saldo -= valor;
