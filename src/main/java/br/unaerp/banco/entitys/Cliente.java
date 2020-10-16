@@ -1,4 +1,4 @@
-package br.unaerp.banco.objects;
+package br.unaerp.banco.entitys;
 
 public class Cliente {
     private String nome;
@@ -21,5 +21,14 @@ public class Cliente {
 
     public Conta getConta() {
         return conta;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", conta=" + conta +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package br.unaerp.banco.objects;
+package br.unaerp.banco.entitys;
 
 import br.unaerp.banco.enums.TipoConta;
 import br.unaerp.banco.exceptions.IncorrectAccountException;
@@ -87,4 +87,14 @@ public class Conta {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Conta{" +
+                "numeroDaConta=" + numeroDaConta +
+                ", limiteContratado=" + limiteContratado +
+                ", extrato=" + extrato +
+                ", tipoConta=" + tipoConta +
+                ", saldo=" + saldo +
+                '}';
+    }
 }

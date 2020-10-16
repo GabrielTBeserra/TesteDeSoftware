@@ -1,4 +1,4 @@
-package br.unaerp.banco.objects;
+package br.unaerp.banco.entitys;
 
 import java.util.Date;
 
